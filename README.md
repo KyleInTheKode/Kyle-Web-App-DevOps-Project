@@ -61,6 +61,7 @@ To run the application, you simply need to run the `app.py` script in this repos
 ## Documentation
 
 ### Terraform
+#### Networking Module
 There are three files in the networking-module
 1. **Variables**
 Which contains all the variables which can be set on launch.
@@ -79,7 +80,7 @@ Which contains all the variables which can be set on launch.
 
 3. **Main**
 
-- resource_group_name - The Azure Resource Group which uses the Group name variable
+- Resource Group Name - The Azure Resource Group which uses the Group name variable
 - Virtual Network - 
 - Control Plane Subnet - 
 - Worker Node Subnet - 
@@ -87,6 +88,28 @@ Which contains all the variables which can be set on launch.
 
 **Initialise**
 After the files have been written out, the command "terrafrom init" can be ran in the "networking-module" folder to get all the necessary files.
+
+#### AKS Cluster Module
+1. **Variables**
+- AKS Cluster name - Represents the name of the AKS cluster you wish to create
+- Cluster Location - Specifies the Azure region where the AKS cluster will be deployed to
+- DNS Prefix - Defines the DNS prefix of cluster
+- Kubernetes Version - Specifies which Kubernetes version the cluster will use
+- Service Principal Client ID - Provides the Client ID for the service principal associated with the cluster
+- Service Principal Secret - Supplies the Client Secret for the service principal
+
+- Resource Group Name - The Azure Resource Group which uses the Group name variable
+- Vnet ID - ID of the Virtual Network
+- Control Plane_Subnet ID - ID of the control plane subnet
+- Worker Node Subnet ID - ID of the worker node subnet
+
+2. **Outputs**
+- Aks Cluster Name  -Name of the AKS cluster
+- Aks Cluster ID - ID of the AKS cluster
+- Aks Kubeconfig - Kubeconfig file for accessing the AKS cluster
+
+3. **Main**
+The main just has one part: azurerm_kubernetes_cluster which contains the default node pool and the server principle
 
 ## License
 
