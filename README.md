@@ -58,33 +58,6 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 - [Maya Iuga]([https://github.com/yourusername](https://github.com/maya-a-iuga))
 
-## Documentation
-
-### Terraform
-There are three files in the networking-module
-1. **Variables**
-Which contains all the variables which can be set on launch.
-
-- Group Name - The name of the Azure Resource Group where the networking resources will be deployed in.
-- Location - The Azure region the resources will be deployed to
-- Vnet Address Space - The address space for the Virtual Network (VNet).
-
-2. **Outputs**
-
-- Vnet ID - Stores the ID of the Vnet. Used within the cluster module to connect the cluster to the defined VNet.
-- Control Plane Subnet ID - Stores the ID of the control plane subnet. Used to specify the subnet where the control plane componenet of the AKS cluster will be deplyed to.
-- Worker Node Subnet ID - Stores the ID of the worker node subnet. Used to specify the subnet where the worker nodes of the AKS cluster will be deployed to.
-- Networking Resource Group Name - Name of the resource group. Used to ensure the cluster module resources are provisioned within the same resource group.
-- Network Securty Group - Name of the security group. Used to associate the NSG with the AKS cluster for security rule enforcement and traffic filtering.
-
-3. **Main**
-
-- resource_group_name - The Azure Resource Group which uses the Group name variable
-- Virtual Network - 
-- Control Plane Subnet - 
-- Worker Node Subnet - 
-- Network Security Group - To allow traffic to the kube-apiserver and to allow SSH traffic.
-
 **Initialise**
 After the files have been written out, the command "terrafrom init" can be ran in the "networking-module" folder to get all the necessary files.
 
