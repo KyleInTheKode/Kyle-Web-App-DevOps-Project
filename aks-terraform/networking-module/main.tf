@@ -46,10 +46,24 @@ resource "azurerm_network_security_group" "name" {
   security_rule {
     name = "kube-apiserver-rule"
     direction = "Inbound"
+    access = "Allow"
+    priority = 1001
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "443"
+    source_address_prefix = var.ip_address  
+    destination_address_prefix = "*"
   }
 
   security_rule {
     name = "ssh-rule"
     direction = "Inbound"
+    access = "Allow"
+    priority = 1002
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "22"
+    source_address_prefix = var.ip_address  
+    destination_address_prefix = "*" 
   }
 }
