@@ -7,3 +7,5 @@ aks-terraform/aks-cluster-module/.terraform.lock.hcl
 aks-terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.0.0/windows_amd64/terraform-provider-azurerm_v3.0.0_x5.exe
 aks-terraform/.terraform.lock.hcl
 aks-terraform/.terraform/modules/modules.json
+aks-terraform/terraform.tfstate
+aks-terraform/.terraform.tfstate.lock.info
