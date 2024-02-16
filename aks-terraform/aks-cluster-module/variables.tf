@@ -19,7 +19,7 @@ variable "kubernetes_version" {
 }
 
 variable "service_principal_client_id" {
-  description = "Provides the Client ID for the service principal associated with the cluste. This should have a unique name so permissions are not overrided by others"
+  description = "Provides the Client ID for the service principal associated with the cluster. This should have a unique name so permissions are not overrided by others"
   type = string
 }
 
