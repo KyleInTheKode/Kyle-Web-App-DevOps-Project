@@ -32,7 +32,7 @@ module "cluster" {
   service_principal_client_id = var.client_id
   service_principal_secret = var.client_secret
 
-  networking_resource_group_name = module.networking.networking_resource_group_name
+  networking_resource_group_name = module.networking.network_resource_group
   vnet_id = module.networking.vnet_id
   control_plane_subnet_id = module.networking.control_plane_subnet_id
   worker_node_subnet_id = module.networking.worker_node_subnet_id

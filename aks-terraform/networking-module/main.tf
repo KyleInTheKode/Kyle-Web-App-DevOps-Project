@@ -11,26 +11,26 @@ provider "azurem" {
   features{}
 }
 
-resource "azurerm_resource_group" "name" {
+resource "azurerm_resource_group" "network_resource_group" {
   name = var.resource_group_name
   location = var.location
 }
 
-resource "azurerm_virtual_network" "name" {
+resource "azurerm_virtual_network" "aks_net" {
   name = "aks-vnet"
   resource_group_name = var.resource_group_name
   address_space = var.vnet_address_space
   location = var.location
 }
 
-resource "azurerm_subnet" "name" {
+resource "azurerm_subnet" "control_plane_subnet" {
   name = "control-plane-subnet"
   resource_group_name = var.resource_group_name
   address_prefixes = var.vnet_address_space
   virtual_network_name = "aks-vnet"
 }
 
-resource "azurerm_subnet" "name2" {
+resource "azurerm_subnet" "worker_node_subnet" {
   name = "worker-node-subnet"
   resource_group_name = var.resource_group_name
   address_prefixes = var.vnet_address_space
@@ -38,7 +38,7 @@ resource "azurerm_subnet" "name2" {
 }
 
 
-resource "azurerm_network_security_group" "name" {
+resource "azurerm_network_security_group" "aks_nsg" {
   name = "aks-nsg"
   location = var.location
   resource_group_name = var.resource_group_name
