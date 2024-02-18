@@ -28,6 +28,8 @@ variable "service_principal_secret" {
   type = string
 }
 
+# Input vairables from the networking module
+
 variable "vnet_id" {
     description = "ID of the Virtual Network"
     type = string
@@ -46,4 +48,9 @@ variable "worker_node_subnet_id" {
 variable "networking_resource_group_name" {
     description = "Name of the resource group"
     type = string
+}
+
+variable "aks_nsg_id" {
+  description = "Test"
+  type = string
 }
