@@ -28,7 +28,7 @@ module "cluster" {
   aks_cluster_name = "terraform-aks-cluster"
   cluster_location = "UK South"
   dns_prefix = "myaks-project"
-  kubernetes_version = "1.29"
+  kubernetes_version = "1.29.0"
   service_principal_client_id = var.client_id
   service_principal_secret = var.client_secret
 
