@@ -18,30 +18,30 @@ resource "azurerm_resource_group" "network_resource_group" {
 
 resource "azurerm_virtual_network" "aks_net" {
   name = "aks-vnet"
-  resource_group_name = var.resource_group_name
   address_space = var.vnet_address_space
-  location = var.location
+  resource_group_name = azurerm_resource_group.network_resource_group.name
+  location = azurerm_resource_group.network_resource_group.location
 }
 
 resource "azurerm_subnet" "control_plane_subnet" {
   name = "control-plane-subnet"
-  resource_group_name = var.resource_group_name
-  address_prefixes = var.vnet_address_space
+  resource_group_name = azurerm_resource_group.network_resource_group.name
+  address_prefixes = ["10.0.1.0/24"]
   virtual_network_name = "aks-vnet"
 }
 
 resource "azurerm_subnet" "worker_node_subnet" {
   name = "worker-node-subnet"
-  resource_group_name = var.resource_group_name
-  address_prefixes = var.vnet_address_space
+  resource_group_name = azurerm_resource_group.network_resource_group.name
+  address_prefixes = ["10.0.1.0/24"]
   virtual_network_name = "aks-vnet"
 }
 
 
 resource "azurerm_network_security_group" "aks_nsg" {
   name = "aks-nsg"
-  location = var.location
-  resource_group_name = var.resource_group_name
+  location = azurerm_resource_group.network_resource_group.location
+  resource_group_name = azurerm_resource_group.network_resource_group.name
 
   security_rule {
     name = "kube-apiserver-rule"
