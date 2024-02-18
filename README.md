@@ -111,6 +111,17 @@ After the files have been written out, the command "terrafrom init" can be ran i
 3. **Main**
 The main just has one part: azurerm_kubernetes_cluster which contains the default node pool and the server principle
 
+#### AKS Terraform
+1. **Variables**
+- Client ID - Access key for the provider
+- Client Secret - Secret key for the provider
+- IP Address - To allow traffic from a specific IP address
+
+2. **Main**
+- Provider - Contains the required details to access Azure
+- AKS Module - Contains the contents of the Kubernetes module
+- Networking Module - Contains the contents of the networking module
+
 ## License
 
 This project is licensed under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
