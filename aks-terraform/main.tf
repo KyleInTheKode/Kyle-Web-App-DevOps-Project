@@ -36,4 +36,5 @@ module "cluster" {
   vnet_id = module.networking.vnet_id
   control_plane_subnet_id = module.networking.control_plane_subnet_id
   worker_node_subnet_id = module.networking.worker_node_subnet_id
+  aks_nsg_id = module.networking.aks_nsg_id
 }
