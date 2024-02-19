@@ -122,6 +122,27 @@ The main just has one part: azurerm_kubernetes_cluster which contains the defaul
 - AKS Module - Contains the contents of the Kubernetes module
 - Networking Module - Contains the contents of the networking module
 
+### Kubernetes
+**Deployment Manifest:**
+- Defined a Deployment resource named flask-app-deployment with two replicas to ensure scalability and high availability.
+- Labeled the pod template with app: flask-app to establish a clear connection between the pods and the application being managed.
+- The Deployment points to the specific container image hosted on Docker Hub (truebluecloud/docker_application:version0.1) and exposes port 5000 for communication within the AKS cluster.
+- Implemented the RollingUpdate deployment strategy, with a maximum surge of 1 and a maximum unavailable of 1 during updates.
+
+**Service Manifest:**
+- Defined a Service resource named flask-app-service to route internal communication within the AKS cluster.
+- The service selector matches the labels (app: flask-app) of the pods defined in the Deployment manifest.
+- The service is configured to use TCP protocol on port 80 for internal communication, with the targetPort set to 5000.
+
+**Deployment Strategy**
+The RollingUpdate deployment strategy was chosen as it ensures a smooth transition during updates. This works by making sure that at most there will only ever be one pod unavaliable at a time.
+
+**Testing and Validation**
+- Verfied the status and details of the pods and services, ensuring the pods are running.
+- Used port forwarding to create a secure channel to interact with it locally on my PC.
+- Accessed the page with the address: _http://127.0.0.1:5000_
+- Went through pages and used the _Add Order_ button multiple times.
+
 ## License
 
 This project is licensed under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
