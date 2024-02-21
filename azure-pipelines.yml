@@ -16,5 +16,5 @@ steps:
     containerRegistry: 'Docker Hub'
     repository: 'truebluecloud/docker_application_pipeline'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '**/dockerfile'
     tags: 'latest'
