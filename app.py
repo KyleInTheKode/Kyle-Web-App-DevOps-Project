@@ -3,6 +3,8 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
+from azure.identity import ManagedIdentityCredential
+from azure.keyvault.secrets import SecretClient
 import pyodbc
 import os
 
@@ -15,6 +17,13 @@ database = 'orders-db'
 username = 'maya'
 password = 'AiCore1237'
 driver= '{ODBC Driver 18 for SQL Server}'
+
+# Key Vault values
+key_vault_url = "https://kyle-devops-key.vault.azure.net/"
+credential = ManagedIdentityCredential()
+secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
+secret = secret_client.get_secret("Server-Password")
+secret_value = secret.value
 
 # Create the connection string
 connection_string=f'Driver={driver};\
