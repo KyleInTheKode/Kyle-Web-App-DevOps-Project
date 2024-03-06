@@ -123,25 +123,63 @@ The main just has one part: azurerm_kubernetes_cluster which contains the defaul
 - Networking Module - Contains the contents of the networking module
 
 ### Kubernetes
-**Deployment Manifest:**
+**Deployment Manifest**
 - Defined a Deployment resource named flask-app-deployment with two replicas to ensure scalability and high availability.
 - Labeled the pod template with app: flask-app to establish a clear connection between the pods and the application being managed.
 - The Deployment points to the specific container image hosted on Docker Hub (truebluecloud/docker_application:version0.1) and exposes port 5000 for communication within the AKS cluster.
 - Implemented the RollingUpdate deployment strategy, with a maximum surge of 1 and a maximum unavailable of 1 during updates.
 
-**Service Manifest:**
+**Service Manifest**
 - Defined a Service resource named flask-app-service to route internal communication within the AKS cluster.
 - The service selector matches the labels (app: flask-app) of the pods defined in the Deployment manifest.
 - The service is configured to use TCP protocol on port 80 for internal communication, with the targetPort set to 5000.
 
 **Deployment Strategy**
-The RollingUpdate deployment strategy was chosen as it ensures a smooth transition during updates. This works by making sure that at most there will only ever be one pod unavaliable at a time.
+- The RollingUpdate deployment strategy was chosen as it ensures a smooth transition during updates. This works by making sure that at most there will only ever be one pod unavaliable at a time.
 
 **Testing and Validation**
 - Verfied the status and details of the pods and services, ensuring the pods are running.
 - Used port forwarding to create a secure channel to interact with it locally on my PC.
 - Accessed the page with the address: _http://127.0.0.1:5000_
 - Went through pages and used the _Add Order_ button multiple times.
+
+### Azure CI/CD Pipeline
+- The source code repository is hosted on https://github.com/KyleInTheKode/Kyle-Web-App-DevOps-Project.
+- The build pipeine uses Azure DevOps Pipeline to build and push to the docker repository: truebluecloud/docker_application_pipeline when an update to the main branch is updated.
+- Once it is built, the release pipeline deploys the application to the Azure Kuberenetes Service cluster.
+- To ensure that the piepline was correctly configured, I made sure the pipeline logs had no errors, checked the Docker hub to ensure an update was pushed, then accessed the application at the local host.
+
+### Monitoring
+**Metrics**
+- Average Node CPU Usage - Helps ensure efficient resource allocation and detect potential performance issues
+- Average Pod Count - Helps to evaluate the cluster's capacity and workload distribution
+- Used Disk Percentage - Helps to measure how much disk is being used to help prevent low storage issues
+- Bytes Read and Written per Second - Helps to monitor the I/O, potentially identifying perfomance bottlenecks.
+
+**Logs**
+- Average Node CPU Usage Percentage per Minute - This configuration captures data on node-level usage at a granular level, with logs recorded per minute
+- Average Node Memory Usage Percentage per Minute - Similar to CPU usage, this log captures node-level memory usage per minute
+- Pods Counts with Phase - This log configuration provides information on the count of pods with different phases, such as Pending, Running, or Terminating
+- Find Warning Value in Container Logs - This log configuration searches for warning values in container logs, helping proactively detect issues or errors
+- Monitoring Kubernetes Events - This log configuration monitors Kubernetes events, providing insights into pod scheduling, scaling activities, and errors
+
+**Alerts**
+- Used Disk Percentage - If used disk space goes above 80% an email alert will be sent off. This is checked every 5 minutes, looking at the last 15 minutes
+- CPU Usage Percentage - If CPU usage goes above 80% an email alert will be sent off. This is checked every 5 minutes, looking at the last 15 minutes
+- Memory Working Set Percentage - If memory working set goes above 80% an email alert will be sent off. This is checked every 5 minutes, looking at the last 15 minutes
+
+### Key Vault
+
+**Stored Secrets**
+- server-name
+- server-username
+- server-password
+- database-name
+
+![image]()
+
+**Modifications**
+To incorporate the key vault into the application, the stored secrets were changed to a link to the keyvault, adding the dependencies to both the app script as well as the requirements folder for docker to build from.
 
 ## License
 
