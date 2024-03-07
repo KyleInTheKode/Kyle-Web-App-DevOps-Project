@@ -176,7 +176,7 @@ The main just has one part: azurerm_kubernetes_cluster which contains the defaul
 - server-password
 - database-name
 
-![image]()
+![image](https://github.com/KyleInTheKode/Kyle-Web-App-DevOps-Project/blob/main/Map.png)
 
 **Modifications**
 To incorporate the key vault into the application, the stored secrets were changed to a link to the keyvault, adding the dependencies to both the app script as well as the requirements folder for docker to build from.
