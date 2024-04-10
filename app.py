@@ -12,10 +12,6 @@ import os
 app = Flask(__name__)
 
 # database connection 
-server = 'devops-project-server.database.windows.net'
-database = 'orders-db'
-username = 'maya'
-password = 'AiCore1237'
 driver= '{ODBC Driver 18 for SQL Server}'
 
 # Key Vault values
